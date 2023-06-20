@@ -21,9 +21,13 @@ class FileStorage:
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
+<<<<<<< Updated upstream
         self.__objects.update(
             {obj.to_dict()['__class__'] + '.' + obj.id: obj}
             )
+=======
+        self.all().update({str(obj.to_dict()['__class__']) + '.' + obj.id: obj})
+>>>>>>> Stashed changes
 
     def save(self):
         """Saves storage dictionary to file"""
