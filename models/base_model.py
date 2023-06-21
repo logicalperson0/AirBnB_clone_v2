@@ -34,7 +34,7 @@ class BaseModel:
             for key in kwargs:
                 if key in ['created_at', 'updated_at']:
                     setattr(self, key, datetime.fromisoformat(kwargs[key]))
-                elif '__class__' != key:
+                elif key != '__class__':
                     setattr(self, key, kwargs[key])
             if "id" not in kwargs:
                 self.id = str(uuid.uuid4())
@@ -59,23 +59,46 @@ class BaseModel:
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
-        from models import storage
+        #from models import storage
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
 
     def to_dict(self):
         """Convert instance into dict format"""
+        """
+        dictionary = {}
+
+        dictionary.update(self.__dict__)
+        dictionary.update({'__class__':
+                          (str(type(self)).split('.')[-1]).split('\'')[0]})
+        dictionary['created_at'] = self.created_at.isoformat()
+        dictionary['updated_at'] = self.updated_at.isoformat()
+
+        if "_sa_instance_state" in dictionary.keys():
+            del dictionary["_sa_instance_state"]
+
+        if 'name' in dictionary.keys():
+            del dictionary['name']
+
+        # return dictionary
+        """
+
         dct = self.__dict__.copy()
         dct['__class__'] = self.__class__.__name__
+
         for k in dct:
             if type(dct[k]) is datetime:
                 dct[k] = dct[k].isoformat()
-        if '_sa_instance_state' in dct.keys():
+
+        if '_sa_instance_state' in dct:
             del(dct['_sa_instance_state'])
+            # dct.pop('_sa_instance_state')
+
         return dct
+
 
     def delete(self):
         """delets the current instance from storage"""
-        from models import storage
+        # from models import storage
         storage.delete(self)
