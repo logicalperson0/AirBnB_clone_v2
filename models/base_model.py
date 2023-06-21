@@ -26,9 +26,11 @@ class BaseModel:
     if storage_type == 'db':
         id = Column(String(60), unique=True, nullable=False, primary_key=True)
 
-        created_at = Column(DATETIME, nullable=False, default=(datetime.utcnow()))
+        created_at = Column(DATETIME, nullable=False,
+                            default=(datetime.utcnow()))
 
-        updated_at = Column(DATETIME, nullable=False, default=(datetime.utcnow()))
+        updated_at = Column(DATETIME, nullable=False,
+                            default=(datetime.utcnow()))
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
@@ -109,15 +111,14 @@ class BaseModel:
         return dictionary
         """
 
-
         dicts = dict(self.__dict__)
         dicts["created_at"] = self.created_at.isoformat()
         dicts["updated_at"] = self.updated_at.isoformat()
         dicts["__class__"] = self.__class__.__name__
 
-        if '_sa_instance_state' in my_dict.keys():
-            del my_dict['_sa_instance_state']
-        return my_dict
+        if '_sa_instance_state' in dicts.keys():
+            del dicts['_sa_instance_state']
+        return dicts
 
     def delete(self):
         """delets the current instance from storage"""

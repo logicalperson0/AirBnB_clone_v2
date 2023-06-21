@@ -257,7 +257,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         for key in ob_dic:
-                ob_list.append(str(ob_dic[key]))
+            ob_list.append(str(ob_dic[key]))
 
         print("[", end="")
         print(", ".join(ob_list), end="")
