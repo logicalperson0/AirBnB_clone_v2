@@ -86,7 +86,7 @@ class BaseModel:
 
     def to_dict(self):
         """Convert instance into dict format"""
-        """
+
         dictionary = {}
         dictionary.update(self.__dict__)
         dictionary.update({'__class__':
@@ -94,11 +94,10 @@ class BaseModel:
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
 
-        if "_sa_instance_state" in dictionary.keys():
-            del dictionary["_sa_instance_state"]
+        #if "_sa_instance_state" in dictionary.keys():
+         #   del dictionary["_sa_instance_state"]
 
         return dictionary
-        """
         """
         dct = self.__dict__
         dct['__class__'] = self.__class__.__name__
@@ -115,15 +114,17 @@ class BaseModel:
 
         return dct
         """
+        """
         myDict = dict(self.__dict__)
         myDict["__class__"] = self.__class__.__name__
         myDict["created_at"] = self.created_at.isoformat()
         myDict["updated_at"] = self.updated_at.isoformat()
 
-        if "_sa_instance_state" in myDict.keys():
-            del myDict["_sa_instance_state"]
+        #if "_sa_instance_state" in myDict.keys():
+         #   del myDict["_sa_instance_state"]
 
         return myDict
+        """
 
 
     def delete(self):
