@@ -147,7 +147,8 @@ class HBNBCommand(cmd.Cmd):
                         else:
                             try:
                                 v = int(v)
-                            except Exception as mess:
+
+                            except DoesNotExist:
                                 continue
                     dicts[k] = v
 
