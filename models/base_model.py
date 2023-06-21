@@ -9,6 +9,7 @@ from models import storage_type
 
 Base = declarative_base()
 
+
 class BaseModel:
     """A base class for all hbnb models
 
@@ -33,9 +34,16 @@ class BaseModel:
             for key in kwargs:
                 if key in ['created_at', 'updated_at']:
                     setattr(self, key, datetime.fromisoformat(kwargs[key]))
-                elif key != '__Class__':
-                    setattr(self, key, kwargs[key]) 
-            
+                elif '__class__' != key:
+                    setattr(self, key, kwargs[key])
+            if "id" not in kwargs:
+                self.id = str(uuid.uuid4())
+
+            if "created_at" not in kwargs:
+                self.created_at = datetime.now()
+            if "updated_at" not in kwargs:
+                self.updated_at = datetime.now()
+
             if storage_type == 'db':
                 if not hasattr(kwargs, 'id'):
                     setattr(self, 'id', str(uuid.uuid4()))
@@ -66,7 +74,7 @@ class BaseModel:
         if '_sa_instance_state' in dct.keys():
             del(dct['_sa_instance_state'])
         return dct
-    
+
     def delete(self):
         """delets the current instance from storage"""
         from models import storage

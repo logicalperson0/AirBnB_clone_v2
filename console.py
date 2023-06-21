@@ -147,7 +147,7 @@ class HBNBCommand(cmd.Cmd):
                         else:
                             try:
                                 v = int(v)
-                            except ObjectDoesNotExist:
+                            except DoesNotExist:
                                 continue
                     dicts[k] = v
 
