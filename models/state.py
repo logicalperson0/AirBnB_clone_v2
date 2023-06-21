@@ -1,22 +1,27 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
+from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
 from models import storage_type
 from models import city
 from sqlalchemy import Column, String
 
 
-class State(BaseModel, Base):
+class State(BaseModel): #, Base):
     """ State class/ table model """
     __tablename__ = 'states'
     if storage_type == 'db':
         name = Column(String(128), nullable=False)
+        cities = relationship("City", backref="state",
+                              cascade="all, delete, delete-orphan")
     else:
         name = ""
 
+    #if storage_type != 'db':
         @property
         def cities(self):
-            """returns the list of City instances with state_id
+            """
+            returns the list of City instances with state_id
                 equals the current State.id
                 FileStorage relationship between State and City
             """
@@ -27,4 +32,3 @@ class State(BaseModel, Base):
                 if city.state_id == self.id:
                     related_cities.append(city)
             return related_cities
-
