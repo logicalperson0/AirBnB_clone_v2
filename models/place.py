@@ -9,7 +9,7 @@ from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.sql.schema import Table
 from sqlalchemy.orm import relationship
 
-
+"""
 place_amenity = Table('place_amenity', Base.metadata,
                       Column('place_id', String(60),
                              ForeignKey('places.id'),
@@ -19,9 +19,9 @@ place_amenity = Table('place_amenity', Base.metadata,
                              ForeignKey('amenities.id'),
                              primary_key=True,
                              nullable=False))
+"""
 
-
-class Place(BaseModel, Base):
+class Place(BaseModel): #, Base):
     """ A place to stay """
     __tablename__ = 'places'
     if storage_type == 'db':
@@ -37,8 +37,8 @@ class Place(BaseModel, Base):
         longitude = Column(Float, nullable=True)
         reviews = relationship('Review', backref='place',
                                cascade='all, delete, delete-orphan')
-        amenities = relationship('Amenity', secondary=place_amenity,
-                                 viewonly=False, backref='place_amenities')
+   #     amenities = relationship('Amenity', secondary=place_amenity,
+    #                             viewonly=False, backref='place_amenities')
     else:
         city_id = ""
         user_id = ""
