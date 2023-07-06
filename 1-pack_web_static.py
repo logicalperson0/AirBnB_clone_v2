@@ -16,7 +16,7 @@ def do_pack():
         format_time = datetime.now().strftime("%Y%m%d%H%M%S")
         f_name = 'versions/web_static_{}.tgz'.format(format_time)
 
-        local("tar -cvzf {} web_static".format(f_name))
+        local("tar -cvzf {} web_static/".format(f_name))
 
         return f_name
 
