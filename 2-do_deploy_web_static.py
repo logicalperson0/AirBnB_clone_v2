@@ -7,10 +7,11 @@ archive to the web servers
 from fabric.api import *
 from datetime import datetime
 import os
-import shlex
+# import shlex
 
 
 env.hosts = ["54.85.96.179", "34.232.65.41"]
+
 
 def do_deploy(archive_path):
     if not os.path.exists(archive_path):
