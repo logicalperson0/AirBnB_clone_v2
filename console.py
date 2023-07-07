@@ -2,6 +2,7 @@
 """ Console Module """
 import cmd
 import sys
+import shlex
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -230,6 +231,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
+        """
         print_list = []
 
         if args:
@@ -245,6 +247,22 @@ class HBNBCommand(cmd.Cmd):
                 print_list.append(str(v))
 
         print(print_list)
+        """
+        args = shlex.split(args)
+        ob_list = []
+        if len(args) == 0:
+            ob_dic = storage.all()
+        elif args[0] in self.classes:
+            ob_dic = storage.all(self.classes[args[0]])
+        else:
+            print("** class doesn't exist **")
+            return
+        for key in ob_dic:
+            ob_list.append(str(ob_dic[key]))
+
+        print("[", end="")
+        print(", ".join(ob_list), end="")
+        print("]")
 
     def help_all(self):
         """ Help information for the all command """
