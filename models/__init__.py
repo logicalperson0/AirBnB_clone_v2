@@ -2,7 +2,7 @@
 """This module instantiates an instance of the Storage will be used"""
 
 from os import getenv
-import pymysql
+#import pymysql
 
 
 storage_type = getenv('HBNB_TYPE_STORAGE')
