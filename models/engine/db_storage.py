@@ -39,8 +39,8 @@ class DBStorage:
 
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
-        classes = {"Amenity": Amenity, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+        classes = {"Amenity": Amenity, "City": City, "Place": Place,
+                   "Review": Review, "State": State, "User": User}
 
         """
         objects = {}
@@ -111,7 +111,7 @@ class DBStorage:
         self.__session = Session()
 
     def close(self):
-        '''
+        """
             Closes the SQLAlchemy session
-        '''
+        """
         self.__session.close()
