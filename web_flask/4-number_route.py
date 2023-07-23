@@ -39,7 +39,7 @@ def python_text(text="is cool"):
 def number_n(n):
     """Function that routes: /number/<n>: display “n is a number”
     only if n is an integer"""
-    if n is int:
+    if isinstance(n, int) is True:
         return "{} is a number".format(n)
 
 
