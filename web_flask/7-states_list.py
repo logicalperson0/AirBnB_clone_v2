@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def teardown_app(exception):
+def teardown_app(exception=None):
     """teardown_app"""
     storage.close()
 
