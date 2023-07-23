@@ -19,8 +19,11 @@ def teardown_app(exception=None):
 @app.route("/states_list", strict_slashes=False)
 def states_list():
     """/states_list: display a HTML page"""
-    states_lists = list(storage.all(State).values())
+    states_lists = storage.all(State).values()
     # sorted(entries, key=lambda d: d['title'])
     states_lists = sorted(states_lists, key=lambda d: d.name)
 
     render_template("7-states_list.html", states_lists=states_lists)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
