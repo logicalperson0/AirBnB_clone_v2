@@ -6,16 +6,17 @@ from models.base_model import BaseModel, Base
 from models import storage_type
 from models.city import City
 from sqlalchemy import Column, String
-#from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.ext.declarative import declarative_base
+
 
 class State(BaseModel, Base):
     """ State class/ table model """
     if storage_type == 'db':
         __tablename__ = 'states'
-        #if storage_type == 'db':
+        # if storage_type == 'db':
         name = Column(String(128), nullable=False)
         cities = relationship("City", cascade="all, delete, delete-orphan",
-                            backref='state')
+                              backref='state')
     else:
         name = ""
 
