@@ -27,11 +27,12 @@ def c_text(text):
     return "C %s" % text.replace("_", " ")
 
 
+@app.route("/python/", strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def python_text(text="is cool"):
     """Function that Routes: /python/(<text>): display “Python ”
     followed by the value of the text"""
-    return "Python %s" % text.replace("_", " ")
+    return "Python {}".format(text.replace("_", " "))
 
 
 if __name__ == "__main__":
