@@ -2,31 +2,32 @@
 """
 Starts a Flask web application.
 """
+from models import storage
 from flask import Flask
 from flask import render_template
-from models import storage
 
 app = Flask(__name__)
 
+
 @app.teardown_appcontext
-def teardown_app(exception=None):
-    """teardown_app"""
+def teardown(exc):
+    """Remove the current SQLAlchemy session."""
     storage.close()
 
 
 @app.route("/states", strict_slashes=False)
 def states():
     """/states: display a HTML page"""
-    states_lists = storage.all("State")
-    return render_template("9-states.html", state_lists=state)
+    states = storage.all("State")
+    return render_template("9-states.html", state=states)
 
 
 @app.route("/states/<id>", strict_slashes=False)
 def states_id(id):
     """/states/<id>: display a HTML page"""
-    for states_lists in storage.all("State").values():
-        if states_lists.id == id:
-            return render_template("9-states.html", states_lists=state)
+    for state in storage.all("State").values():
+        if state.id == id:
+            return render_template("9-states.html", state=state)
     return render_template("9-states.html")
 
 
