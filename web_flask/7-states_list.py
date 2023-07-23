@@ -19,7 +19,7 @@ def teardown_app(exception=None):
 @app.route("/states_list", strict_slashes=False)
 def states_list():
     """/states_list: display a HTML page"""
-    states_lists = storage.all(State)
+    states_lists = storage.all(State).values()
     # sorted(entries, key=lambda d: d['title'])
     states_lists = sorted(states_lists, key=lambda d: d.name)
 
