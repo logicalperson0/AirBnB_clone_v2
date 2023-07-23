@@ -16,12 +16,20 @@ def teardown_app(exception=None):
 
 
 @app.route("/states", strict_slashes=False)
+def states():
+    states_lists = storage.all("State").values()
+    states_lists = sorted(states_lists, key=lambda d: d.name)
+    return render_template("9-states.html", state_lists=state)
+
+
 @app.route("/states/<id>", strict_slashes=False)
 def states_id(id):
     """/states/<id>: display a HTML page"""
-    for states_lists in storage.all("State").values():
-        if states_lists.id == id:
-            return render_template("9-states.html", states_lists=state)
+    states_lists = storage.all("State").values()
+    states_lists = sorted(states_lists, key=lambda d: d.name)
+    for states_list in states_lists:
+        if states_list.id == id:
+            return render_template("9-states.html", states_list=state)
     return render_template("9-states.html")
 
 
