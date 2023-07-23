@@ -23,7 +23,7 @@ def states_list():
     # sorted(entries, key=lambda d: d['title'])
     states_lists = sorted(states_lists, key=lambda d: d.name)
 
-    render_template("7-states_list.html", states_lists=states_lists)
+    return render_template("7-states_list.html", states_lists=states_lists)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
